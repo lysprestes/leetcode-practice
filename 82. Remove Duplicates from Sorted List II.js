@@ -31,29 +31,45 @@ The list is guaranteed to be sorted in ascending order.
  * @param {ListNode} head
  * @return {ListNode}
  */
-const deleteDuplicates = function (head) {
-  if (!head) return null
+// const deleteDuplicates = function (head) {
+//   if (!head) return null
 
-  let dummy = new ListNode(-Infinity, head)
-  let previous = dummy
-  let current = head
-  let next = current.next
+//   let dummy = new ListNode(-Infinity, head)
+//   let previous = dummy
+//   let current = head
+//   let next = current.next
 
-  while (current) {
-    if (current && next && current.val === next.val) {
-      while (next && current.val === next.val) {
-        next === next.next
-      }
+//   while (current) {
+//     if (current && next && current.val === next.val) {
+//       while (next && current.val === next.val) {
+//         next === next.next
+//       }
 
-      previous.next = next
-      current = next
-      next = next ? next.next : null
-    } else {
-      previous = current
-      current = next
-      next = next ? next.next : null
-    }
+//       previous.next = next
+//       current = next
+//       next = next ? next.next : null
+//     } else {
+//       previous = current
+//       current = next
+//       next = next ? next.next : null
+//     }
+//   }
+
+//   return dummy.next
+// }
+
+// -----------other resolution------------
+
+const deleteDuplicates = function(head) {
+  let prev = new ListNode(-1, head)
+  let newHead = prev
+  let cur = head
+  while(cur && cur.next) {
+      if (cur.val == cur.next.val) {
+          while(cur.next && cur.val == cur.next.val) cur = cur.next 
+          prev.next = cur.next
+      } else prev = prev.next
+      cur = cur.next
   }
-
-  return dummy.next
-}
+  return newHead.next  
+};
